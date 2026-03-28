@@ -1,0 +1,18 @@
+{
+  "name": "plugin-qa",
+  "version": "3.0.0",
+  "description": "PQA — Plugin Quality Auditor. Plugin development lifecycle management: ideate, plan, design, specify, build, validate, audit, report, and fix plugins. 4 agents, 20 skills, 31 commands.",
+  "author": {
+    "name": "Javier Montaño Guzmán",
+    "email": "javier.montano@sofka.com.co",
+    "url": "https://sofka.com.co"
+  },
+  "license": "All Rights Reserved",
+  "keywords": [
+    "plugin-development",
+    "qa",
+    "validation",
+    "lifecycle",
+    "sofka"
+  ]
+}
