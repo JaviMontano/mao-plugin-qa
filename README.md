@@ -1,127 +1,108 @@
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1E3258,100:137DC5&height=220&section=header&text=Plugin%20QA%20(PQA)&fontSize=50&fontColor=FFD700&fontAlignY=35&desc=Ciclo%20de%20vida%20completo%20para%20plugins%20de%20Claude%20Code&descSize=18&descColor=ffffff&descAlignY=55" alt="Plugin QA Banner" />
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:122562,100:137DC5&height=180&section=header&text=Plugin%20QA%20%28PQA%29&fontSize=36&fontColor=FFFFFF&fontAlignY=35&desc=Ciclo%20de%20vida%20completo%20para%20plugins%20de%20Claude%20Code&descSize=14&descAlignY=55&descColor=BBA0CC">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:122562,100:137DC5&height=180&section=header&text=Plugin%20QA%20%28PQA%29&fontSize=36&fontColor=FFFFFF&fontAlignY=35&desc=Ciclo%20de%20vida%20completo%20para%20plugins%20de%20Claude%20Code&descSize=14&descAlignY=55&descColor=BBA0CC" width="100%">
+</picture>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/versión-2.0.0-137DC5?style=for-the-badge" alt="Versión" />
-  <img src="https://img.shields.io/badge/licencia-MIT-122562?style=for-the-badge" alt="Licencia" />
-  <img src="https://img.shields.io/badge/agentes-4-FFD700?style=for-the-badge" alt="Agentes" />
-  <img src="https://img.shields.io/badge/skills-20-BBA0CC?style=for-the-badge" alt="Skills" />
-  <img src="https://img.shields.io/badge/comandos-31-808080?style=for-the-badge" alt="Comandos" />
+  <img src="https://img.shields.io/badge/v2.0.0-FFD700?style=flat-square" alt="v2.0.0">
+  <img src="https://img.shields.io/badge/MIT-22D3EE?style=flat-square" alt="MIT">
+  <img src="https://img.shields.io/badge/4_agentes-6366F1?style=flat-square" alt="4 agentes">
+  <img src="https://img.shields.io/badge/20_skills-8B5CF6?style=flat-square" alt="20 skills">
 </p>
 
----
+# Plugin QA (PQA)
 
-## Acerca de Plugin QA
+> Ciclo de vida completo para plugins de Claude Code
 
-**Plugin QA (PQA)** es un framework de calidad para el ciclo de vida completo de plugins de Claude Code. Desde scaffolding hasta validación, con tests automatizados, auditoría de estructura y publicación.
-
-Cada etapa del desarrollo de un plugin queda cubierta: creación de la estructura inicial, validación de convenciones, ejecución de pruebas y preparación para distribución.
+Framework de calidad para el ciclo de vida completo de plugins de Claude Code. Desde scaffolding hasta publicación.
 
 ---
 
-## Características principales
-
-- **Scaffolding de plugins** — Genera la estructura completa de un plugin en segundos
-- **Validación de estructura** — Verifica que el plugin cumple con las convenciones requeridas
-- **Tests automatizados** — Suite de pruebas para cada skill y comando del plugin
-- **Auditoría de calidad** — Análisis profundo de cobertura, consistencia y documentación
-- **Publicación asistida** — Preparación del paquete para distribución
-- **Compatible con marketplace** — Validación contra los requisitos del ecosistema
-
----
-
-## Instalación
-
-Agrega Plugin QA como plugin de Claude Code:
+## 🚀 Instalación Rápida
 
 ```bash
-# Instalar vía CLI
-claude plugin:install ./plugins/plugin-qa
-
-# O agregar la ruta del plugin a tu configuración de Claude Code
+git clone https://github.com/JaviMontano/mao-plugin-qa.git ~/.claude/plugins/mao-plugin-qa
 ```
 
----
+## 🔑 Qué Hace
 
-## Uso rápido
+- Scaffolding de plugins con estructura canónica
+- Validación de estructura y metadatos
+- Tests automatizados de agentes y skills
+- Auditoría de calidad (MOAT compliance)
+- Publicación asistida al marketplace
+- 4 agentes especializados
 
-```
-/pqa:create "<idea>"    # Crea un plugin desde cero con ideación guiada
-/pqa:lifecycle "<idea>" # Pipeline completo: crear + QA en un solo flujo
-/pqa:audit [ruta]       # Auditoría completa de calidad
-/pqa:validate           # Validación estructural rápida
-/pqa:fix                # Auto-corrección de problemas comunes
-/pqa:menu               # Los 31 comandos disponibles
-```
-
----
-
-## Arquitectura
-
-PQA orquesta 4 agentes a través de 9 movimientos:
+## 📐 Arquitectura
 
 ```
-  UPSTREAM (Crear)                     DOWNSTREAM (QA)
-  ==================                   ================
-  1. IDEATE ----+                      6. VALIDATE
-                |  G1                  7. AUDIT
-  2. PLAN ------+                      8. REPORT
-                |  G2                  9. FIX
-  3. DESIGN ----+
-                |  G3
-  4. SPECIFY ---+
-                |  G4
-  5. BUILD -----+--> Directorio del Plugin --> VALIDATE -> AUDIT -> REPORT -> (FIX)
+IDEATE → SCAFFOLD → DEVELOP → TEST → VALIDATE → DOCUMENT → PUBLISH → MAINTAIN → FIX
 ```
 
-Las puertas de calidad G1-G4 requieren aprobación del usuario entre movimientos upstream.
+## 🔗 Parte del Ecosistema MetodologIA / JM Labs
+
+| Repo | Descripción |
+|------|-------------|
+| [**mao-discovery-framework**](https://github.com/JaviMontano/mao-discovery-framework) | MAO Discovery |
+| [**mao-sdd**](https://github.com/JaviMontano/mao-sdd) | SDD |
+| [**mao-sovereign-architect**](https://github.com/JaviMontano/mao-sovereign-architect) | Sovereign Architect |
+
+## 👤 Autor
+
+<img src="https://github.com/ejemplo-deo-repo/mao-brand-assets/blob/main/team_javier-montano.webp?raw=true" width="80" align="left" style="margin-right:1rem;">
+
+**Javier Montaño** — Founder MetodologIA & JM Labs<br>
+40.000 horas convirtiendo retos en casos de éxito.<br>
+[GitHub](https://github.com/JaviMontano) · [MetodologIA](https://metodologia.info) · [LinkedIn](https://co.linkedin.com/in/javier-andr%C3%A9s-monta%C3%B1o-guzm%C3%A1n-35b02756/en)
+
+<br clear="both">
+
+## 📄 Licencia
+
+MIT — © 2026 Javier Montaño · JM Labs
 
 ---
 
-## Agentes
+<details>
+<summary><b>🇬🇧 English</b></summary>
+<br>
 
-| Agente | Rol | Movimientos |
-|--------|-----|-------------|
-| `plugin-architect` | Ideación, planificación de arquitectura, diseño de componentes | IDEATE, PLAN, DESIGN |
-| `plugin-spec-writer` | Especificaciones listas para producción y activos MOAT | SPECIFY |
-| `plugin-builder-agent` | Generación de código, scaffolding, creación de directorios MOAT | BUILD |
-| `plugin-qa-engineer` | Validación, auditoría de seguridad, reportes, auto-corrección | VALIDATE, AUDIT, REPORT, FIX |
+# Plugin QA (PQA)
 
----
+> Full lifecycle for Claude Code plugins
 
-## Patrón MOAT
+Quality framework for the full lifecycle of Claude Code plugins. From scaffolding to publishing.
 
-MOAT (Methods, Ontology, Assets, Templates) es el patrón de calidad para profundidad de skills:
+### What It Does
 
-- `references/` — Archivos de ontología, resúmenes de especificaciones, conocimiento de dominio
-- `examples/` — Ejemplos de entrada/salida, casos límite, antes/después
-- `prompts/` — Plantillas reutilizables de prompts NL-HP
+- Plugin scaffolding with canonical structure
+- Structure and metadata validation
+- Automated agent and skill testing
+- Quality auditing (MOAT compliance)
+- Assisted marketplace publishing
+- 4 specialized agents
 
----
+### Architecture
 
-## Parte del Ecosistema MetodologIA / JM Labs
+```
+IDEATE → SCAFFOLD → DEVELOP → TEST → VALIDATE → DOCUMENT → PUBLISH → MAINTAIN → FIX
+```
 
-Plugin QA forma parte de un ecosistema más amplio de herramientas:
+### Part of the MetodologIA / JM Labs Ecosystem
 
-| Repositorio | Descripción |
-|-------------|-------------|
-| [mao-discovery-framework](https://github.com/JaviMontano/mao-discovery-framework) | Framework de discovery y análisis organizacional |
-| [mao-sdd](https://github.com/JaviMontano/mao-sdd) | Specification-Driven Development para software |
-| [mao-sovereign-architect](https://github.com/JaviMontano/mao-sovereign-architect) | Arquitectura de software con agentes autónomos |
-
----
-
-## Licencia
-
-Este proyecto está licenciado bajo **MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+| Repo | Description |
+|------|-------------|
+| [**mao-discovery-framework**](https://github.com/JaviMontano/mao-discovery-framework) | MAO Discovery |
+| [**mao-sdd**](https://github.com/JaviMontano/mao-sdd) | SDD |
+| [**mao-sovereign-architect**](https://github.com/JaviMontano/mao-sovereign-architect) | Sovereign Architect |
 
 ---
 
-<p align="center">
-  Creado por <a href="https://github.com/JaviMontano">Javier Montaño</a> · MetodologIA / JM Labs · MIT
-</p>
+<sub>Created by <a href="https://github.com/JaviMontano">Javier Montaño</a> · MetodologIA / JM Labs · MIT</sub>
 
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1E3258,100:137DC5&height=120&section=footer" alt="Footer" />
-</p>
+</details>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:122562,100:137DC5&height=100&section=footer">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:122562,100:137DC5&height=100&section=footer" width="100%">
+</picture>
