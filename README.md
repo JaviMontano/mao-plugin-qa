@@ -1,222 +1,127 @@
-# Plugin QA (PQA)
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1E3258,100:137DC5&height=220&section=header&text=Plugin%20QA%20(PQA)&fontSize=50&fontColor=FFD700&fontAlignY=35&desc=Ciclo%20de%20vida%20completo%20para%20plugins%20de%20Claude%20Code&descSize=18&descColor=ffffff&descAlignY=55" alt="Plugin QA Banner" />
+</p>
 
-![Version](https://img.shields.io/badge/version-2.0.0-6366F1) ![License](https://img.shields.io/badge/license-MIT-22D3EE) ![Agents](https://img.shields.io/badge/agents-4-6366F1) ![Skills](https://img.shields.io/badge/skills-20-6366F1) ![Commands](https://img.shields.io/badge/commands-31-6366F1)
-
-A full-lifecycle framework for Claude Code plugins. Create plugins from scratch with guided ideation, architecture planning, and scaffolding -- then validate, audit, and fix them with automated QA.
-
-PQA started as a QA-only tool and has grown into a complete plugin development lifecycle. The upstream pipeline (IDEATE through BUILD) takes a natural-language idea and produces a fully scaffolded plugin. The downstream pipeline (VALIDATE through FIX) runs 10 quality checks and generates reports with severity-classified findings. Run them together with `/pqa:lifecycle` for end-to-end coverage.
-
-**Brand**: JM Labs | **Prefix**: `/pqa:` | **Version**: 2.0.0
+<p align="center">
+  <img src="https://img.shields.io/badge/versión-2.0.0-137DC5?style=for-the-badge" alt="Versión" />
+  <img src="https://img.shields.io/badge/licencia-MIT-122562?style=for-the-badge" alt="Licencia" />
+  <img src="https://img.shields.io/badge/agentes-4-FFD700?style=for-the-badge" alt="Agentes" />
+  <img src="https://img.shields.io/badge/skills-20-BBA0CC?style=for-the-badge" alt="Skills" />
+  <img src="https://img.shields.io/badge/comandos-31-808080?style=for-the-badge" alt="Comandos" />
+</p>
 
 ---
 
-## Installation
+## Acerca de Plugin QA
+
+**Plugin QA (PQA)** es un framework de calidad para el ciclo de vida completo de plugins de Claude Code. Desde scaffolding hasta validación, con tests automatizados, auditoría de estructura y publicación.
+
+Cada etapa del desarrollo de un plugin queda cubierta: creación de la estructura inicial, validación de convenciones, ejecución de pruebas y preparación para distribución.
+
+---
+
+## Características principales
+
+- **Scaffolding de plugins** — Genera la estructura completa de un plugin en segundos
+- **Validación de estructura** — Verifica que el plugin cumple con las convenciones requeridas
+- **Tests automatizados** — Suite de pruebas para cada skill y comando del plugin
+- **Auditoría de calidad** — Análisis profundo de cobertura, consistencia y documentación
+- **Publicación asistida** — Preparación del paquete para distribución
+- **Compatible con marketplace** — Validación contra los requisitos del ecosistema
+
+---
+
+## Instalación
+
+Agrega Plugin QA como plugin de Claude Code:
 
 ```bash
+# Instalar vía CLI
 claude plugin:install ./plugins/plugin-qa
-```
 
-Or add the plugin path to your Claude Code configuration.
-
----
-
-## Quick Start
-
-```bash
-# Audit an existing plugin
-/pqa:audit /path/to/my-plugin
-
-# Create a new plugin from scratch
-/pqa:create "A plugin for linting Dockerfiles and CI configs"
-
-# Full lifecycle: create + QA in one pipeline
-/pqa:lifecycle "A plugin for managing database migrations"
-
-# Quick structural validation (faster, no content scoring)
-/pqa:validate
-
-# Auto-fix common issues (asks before changing files)
-/pqa:fix
-
-# See all 31 commands
-/pqa:menu
+# O agregar la ruta del plugin a tu configuración de Claude Code
 ```
 
 ---
 
-## Architecture Overview
-
-PQA orchestrates 4 agents across 9 movements:
+## Uso rápido
 
 ```
-  UPSTREAM (Create)                    DOWNSTREAM (QA)
+/pqa:create "<idea>"    # Crea un plugin desde cero con ideación guiada
+/pqa:lifecycle "<idea>" # Pipeline completo: crear + QA en un solo flujo
+/pqa:audit [ruta]       # Auditoría completa de calidad
+/pqa:validate           # Validación estructural rápida
+/pqa:fix                # Auto-corrección de problemas comunes
+/pqa:menu               # Los 31 comandos disponibles
+```
+
+---
+
+## Arquitectura
+
+PQA orquesta 4 agentes a través de 9 movimientos:
+
+```
+  UPSTREAM (Crear)                     DOWNSTREAM (QA)
   ==================                   ================
   1. IDEATE ----+                      6. VALIDATE
                 |  G1                  7. AUDIT
   2. PLAN ------+                      8. REPORT
-                |  G2                  9. FIX (if needed)
+                |  G2                  9. FIX
   3. DESIGN ----+
                 |  G3
   4. SPECIFY ---+
                 |  G4
-  5. BUILD -----+---> Plugin Dir ---> VALIDATE -> AUDIT -> REPORT -> (FIX)
+  5. BUILD -----+--> Directorio del Plugin --> VALIDATE -> AUDIT -> REPORT -> (FIX)
 ```
 
-Quality gates G1-G4 require user approval between upstream movements.
+Las puertas de calidad G1-G4 requieren aprobación del usuario entre movimientos upstream.
 
 ---
 
-## Commands Reference
+## Agentes
 
-| Command | Alias | Movement | Description |
-|---------|-------|----------|-------------|
-| `/pqa:lifecycle` | `/pqa:l` | Full Pipeline | Full 9-movement lifecycle: ideate through report |
-| `/pqa:create` | `/pqa:c` | Upstream (1-5) | Full upstream pipeline: ideate, plan, design, specify, build |
-| `/pqa:ideate` | `/pqa:i` | 1 - IDEATE | Brainstorm a new plugin concept or component |
-| `/pqa:ideate-component` | | 1 - IDEATE | Brainstorm an individual component |
-| `/pqa:plan` | `/pqa:p` | 2 - PLAN | Architecture plan + MOAT strategy |
-| `/pqa:plan-moat` | | 2 - PLAN | MOAT asset allocation per skill |
-| `/pqa:design` | `/pqa:d` | 3 - DESIGN | Design a skill or agent in detail |
-| `/pqa:design-agent` | | 3 - DESIGN | Design an agent directly |
-| `/pqa:spec` | `/pqa:s` | 4 - SPECIFY | Generate specs from designs |
-| `/pqa:spec-agent` | | 4 - SPECIFY | Generate agent + command specs |
-| `/pqa:build` | `/pqa:b` | 5 - BUILD | Scaffold plugin directory from specs |
-| `/pqa:build-moat` | | 5 - BUILD | Create MOAT directories and assets |
-| `/pqa:audit` | `/pqa:a` | 6+7 - VALIDATE+AUDIT | Full QA audit, report + scorecard |
-| `/pqa:validate` | `/pqa:v` | 6 - VALIDATE | Quick structural validation (5 skills) |
-| `/pqa:hooks-check` | | 6 - VALIDATE | Hook type-event compatibility check |
-| `/pqa:security` | | 7 - AUDIT | Security-only scan |
-| `/pqa:report` | `/pqa:r` | 8 - REPORT | Generate QA report |
-| `/pqa:scorecard` | | 8 - REPORT | Executive scorecard with grades |
-| `/pqa:fix` | `/pqa:f` | 9 - FIX | Auto-fix common issues |
-| `/pqa:menu` | | Utility | Interactive command palette |
-
-**Total: 31 commands** (20 canonical + 11 aliases)
+| Agente | Rol | Movimientos |
+|--------|-----|-------------|
+| `plugin-architect` | Ideación, planificación de arquitectura, diseño de componentes | IDEATE, PLAN, DESIGN |
+| `plugin-spec-writer` | Especificaciones listas para producción y activos MOAT | SPECIFY |
+| `plugin-builder-agent` | Generación de código, scaffolding, creación de directorios MOAT | BUILD |
+| `plugin-qa-engineer` | Validación, auditoría de seguridad, reportes, auto-corrección | VALIDATE, AUDIT, REPORT, FIX |
 
 ---
 
-## Skills Overview
+## Patrón MOAT
 
-### Movement 1 -- IDEATE
+MOAT (Methods, Ontology, Assets, Templates) es el patrón de calidad para profundidad de skills:
 
-- `ideate-plugin` -- Brainstorm plugin concept from a problem statement
-- `ideate-component` -- Brainstorm an individual component (skill, agent, command, hook)
-
-### Movement 2 -- PLAN
-
-- `plan-architecture` -- Architecture plan with agents, skills, commands, hooks, movements
-- `plan-moat-strategy` -- MOAT complexity assessment and depth allocation
-
-### Movement 3 -- DESIGN
-
-- `design-skill` -- Detailed skill design with procedure, criteria, anti-patterns
-- `design-agent` -- Detailed agent design with roles, skills, constraints
-
-### Movement 4 -- SPECIFY
-
-- `spec-skill-moat` -- Production specification for skill + MOAT asset contents
-- `spec-agent-command` -- Production specification for agent + command definitions
-
-### Movement 5 -- BUILD
-
-- `build-plugin-scaffold` -- Scaffold complete plugin directory from specs
-- `build-moat-assets` -- Create MOAT directories and populate asset files
-
-### Movement 6 -- VALIDATE
-
-- `validate-structure` -- Directory layout and required files
-- `validate-manifest` -- plugin.json schema compliance
-- `validate-components` -- Skills, agents, commands integrity
-- `validate-hooks` -- Hook type-event compatibility (ToolUseContext)
-- `validate-cross-refs` -- Internal references between components
-
-### Movement 7 -- AUDIT
-
-- `audit-security` -- Security findings scan
-- `audit-content-quality` -- Content quality scoring
-
-### Movement 8 -- REPORT
-
-- `generate-qa-report` -- Full markdown QA report
-- `generate-qa-scorecard` -- 7-dimension executive scorecard
-
-### Movement 9 -- FIX
-
-- `fix-common-issues` -- Auto-fix mechanical issues
+- `references/` — Archivos de ontología, resúmenes de especificaciones, conocimiento de dominio
+- `examples/` — Ejemplos de entrada/salida, casos límite, antes/después
+- `prompts/` — Plantillas reutilizables de prompts NL-HP
 
 ---
 
-## Agents
+## Parte del Ecosistema MetodologIA / JM Labs
 
-| Agent | Role | Movements |
-|-------|------|-----------|
-| `plugin-architect` | Concept ideation, architecture planning, component design | IDEATE, PLAN, DESIGN |
-| `plugin-spec-writer` | Production-ready specifications and MOAT assets | SPECIFY |
-| `plugin-builder-agent` | Code generation, scaffolding, MOAT directory creation | BUILD |
-| `plugin-qa-engineer` | Validation, security audit, reporting, auto-fix | VALIDATE, AUDIT, REPORT, FIX |
+Plugin QA forma parte de un ecosistema más amplio de herramientas:
 
----
-
-## MOAT Pattern
-
-MOAT (Methods, Ontology, Assets, Templates) is the quality pattern for skill depth. Each skill can include:
-
-- `references/` -- Ontology files, spec digests, domain knowledge
-- `examples/` -- Input/output examples, edge cases, before/after
-- `prompts/` -- Reusable NL-HP prompt templates
-
-PQA plans MOAT depth during the PLAN movement (`plan-moat-strategy`) and populates assets during BUILD (`build-moat-assets`). See `references/moat-pattern-guide.md` for the full methodology.
+| Repositorio | Descripción |
+|-------------|-------------|
+| [mao-discovery-framework](https://github.com/JaviMontano/mao-discovery-framework) | Framework de discovery y análisis organizacional |
+| [mao-sdd](https://github.com/JaviMontano/mao-sdd) | Specification-Driven Development para software |
+| [mao-sovereign-architect](https://github.com/JaviMontano/mao-sovereign-architect) | Arquitectura de software con agentes autónomos |
 
 ---
 
-## Example Output
+## Licencia
 
-### Scorecard
-
-```
-# QA Scorecard: my-plugin
-
-| Dimension        | Score | Grade | Notes              |
-|------------------|-------|-------|--------------------|
-| Structure        | 95    | A     |                    |
-| Manifest         | 88    | B     | 1 missing field    |
-| Components       | 92    | A     |                    |
-| Hooks            | 100   | A     |                    |
-| Cross-References | 85    | B     | 2 broken refs      |
-| Security         | 90    | A     |                    |
-| Content Quality  | 78    | C     | Descriptions thin  |
-|------------------|-------|-------|--------------------|
-| Overall          | 89    | B     |                    |
-```
-
-### Grading Scale
-
-| Grade | Range | Meaning |
-|-------|-------|---------|
-| A | 90-100 | Production ready |
-| B | 80-89 | Minor issues |
-| C | 70-79 | Needs improvement |
-| D | 60-69 | Significant issues |
-| F | 0-59 | Not ready for use |
+Este proyecto está licenciado bajo **MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
 
-## Troubleshooting
+<p align="center">
+  Creado por <a href="https://github.com/JaviMontano">Javier Montaño</a> · MetodologIA / JM Labs · MIT
+</p>
 
-### "Plugin not found" when running commands
-
-Ensure the plugin directory is correctly referenced in your Claude Code configuration. The plugin root must contain `.claude-plugin/plugin.json`.
-
-### Audit reports showing stale results
-
-Delete the existing `qa-report.md` in the target directory and re-run `/pqa:audit` for a fresh analysis. Results are not cached between runs.
-
-### Hook validation false positives
-
-If `validate-hooks` flags a hook that you know is correct, check that your hook event name matches one of the 22 official events exactly. Custom or misspelled event names will be flagged as CRITICAL findings.
-
----
-
-## License
-
-MIT -- see [LICENSE](./LICENSE).
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1E3258,100:137DC5&height=120&section=footer" alt="Footer" />
+</p>
